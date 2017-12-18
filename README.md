@@ -1,2 +1,2 @@
 # my_blockchain
-Creating a basic Blockchain
+Creating a basic Javascript Blockchain
