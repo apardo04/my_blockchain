@@ -1,4 +1,8 @@
-/*  Blockchain is meant to add blocks, but never delete them */
+/*
+*   A blockchain is an immutable, sequential chain of records called Blocks.
+*   They can contain transactions, files or any data you like, really.
+*   the important thing is that they’re chained together using hashes.
+*   */
 
 const SHA256 = require('crypto-js/sha256');
 class Block {
@@ -26,7 +30,7 @@ class Block {
 class Blockchain {
     constructor() {
         this.chain = [this.createGenesisBlock()];
-        this.difficulty = 5;
+        this.difficulty = 4;
     }
 
     createGenesisBlock() {
@@ -63,17 +67,18 @@ class Blockchain {
 
 let globalCoin = new Blockchain();
 console.log("Mining block 1...");
-globalCoin.addBlock(new Block(1, "10/17/2017", { amount: 4}));
+globalCoin.addBlock(new Block(1, new Date(), { amount: 4, From: "Mileini", To: "Adrian"}));
 
 console.log("Mining block 2...");
-globalCoin.addBlock(new Block(2, "12/17/2017", { amount: 7}));
+globalCoin.addBlock(new Block(2, new Date(), { amount: 4, From: "Adrian", To: "Mileini"}));
 
-/*  Tamporing with a block.
- Changing amount, and recalculating hash.
- This does not work because the blocks relationship
- with the previous block gets broken.
- */
-//globalCoin.chain[1].data = { amount: 100 };
+/*
+    Tampering with a block.
+    Changing amount, and recalculating hash.
+    This does not work because the blocks relationship
+    with the previous block gets broken.
+*/
+//globalCoin.chain[1].data = { amount: 100, From: "Mileini", To: "Adrian" };
 //globalCoin.chain[1].hash = globalCoin.chain[1].calculateHash();
 
 
